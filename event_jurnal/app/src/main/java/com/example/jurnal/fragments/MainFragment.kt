@@ -15,6 +15,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.jurnal.Constans.Companion.counterId
+import com.example.jurnal.Constans.Companion.notes
 import com.example.jurnal.R
 import com.example.jurnal.adapters.MainAdapter
 import com.example.jurnal.models.Notes
@@ -32,23 +34,10 @@ class MainFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        addNotesBtn = view.findViewById(R.id.add_notes_btn)
+        addNotesBtn = view.findViewById(R.id.addBtn)
 
         recyclerView = view.findViewById(R.id.recyclerView_main)
         recyclerView.adapter = MainAdapter(notes, requireActivity())
-
-        //удаление по свайпу
-        val swipeToDelete = object : swipeToDelete(){
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                notes.removeAt(position)
-                recyclerView.adapter?.notifyItemRemoved(position)
-            }
-        }
-
-
-        val itemTouchHelper = ItemTouchHelper(swipeToDelete)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
 
         addNotesBtn.setOnClickListener {
             addNotesDialog()
@@ -59,7 +48,6 @@ class MainFragment : Fragment() {
 
     private fun addNotesDialog() {
         val alert = AlertDialog.Builder(requireContext())
-        val layoutInflater
         val inflater = layoutInflater.inflate(R.layout.add_notes, null)
         alert.setView(inflater)
 
@@ -141,4 +129,5 @@ class MainFragment : Fragment() {
             dialog.dismiss()
         }
         dialog.show()
+    }
 }

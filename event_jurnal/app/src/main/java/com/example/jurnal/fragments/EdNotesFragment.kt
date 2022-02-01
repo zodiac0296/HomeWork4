@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.jurnal.Constans.Companion.notes
 import com.example.jurnal.R
 import com.example.jurnal.models.Notes
 
@@ -85,8 +86,9 @@ class EdNotesFragment : Fragment() {
         }
 
         saveBtn.setOnClickListener {
-            for(item in notes){
-                if (note.id == item.id){
+
+            for(item in notes) {
+                if (note.id == item.id) {
                     item.name = nameEd.text.toString()
                     item.shortDescription = shortDescription.text.toString()
                     item.detailedDescription = detailedDescription.text.toString()
@@ -100,15 +102,11 @@ class EdNotesFragment : Fragment() {
                         ?.replace(R.id.conteiner_frag, MainFragment())?.commit()
 
                     Log.d("@@@@", "Update notes: ${item}")
+
                 }
+
             }
         }
-
-        backBtn.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, MainFragment())?.commit()
-        }
-
         return view
 
     }

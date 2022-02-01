@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ class MainAdapter(private var array: ArrayList<Notes>, private val context: Frag
         val startDateEvent: TextView = view.findViewById(R.id.start_event_date)
         val endDateEvent: TextView = view.findViewById(R.id.end_event_date)
         val userNotes: TextView = view.findViewById(R.id.user_notes)
+        val buttonDelete: Button = view.findViewById(R.id.buttonDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,16 +48,15 @@ class MainAdapter(private var array: ArrayList<Notes>, private val context: Frag
             context.supportFragmentManager.beginTransaction()
                 .replace(R.id.conteiner_frag, EdNotesFragment::class.java, bundle)
                 .addToBackStack(null).commit()
-        }
 
+        }
+        holder.buttonDelete.setOnClickListener {
+            array.removeAt(position)
+            notifyDataSetChanged()
+        }
     }
 
     override fun getItemCount(): Int {
         return array.size
-    }
-
-    fun deleteItem(i: Int){
-        Constans.notes.removeIt(i)
-        notifyDataSetChanged()
     }
 }
