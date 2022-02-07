@@ -11,9 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textColor="#494949"
+        android:textColor="#930B0B"
         android:textSize="20dp"
-        android:textStyle="bold|italic"
         tools:text="Name" />
 
     <TextView
